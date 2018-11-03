@@ -2,6 +2,7 @@
 using JustAnotherConsoleGame.Map;
 using JustAnotherConsoleGame.Map.Texture;
 using System;
+using System.Drawing;
 using System.Text;
 
 namespace JustAnotherConsoleGame
@@ -10,7 +11,7 @@ namespace JustAnotherConsoleGame
     {
         private static InputManager inputManager = new InputManager();
         private static Player player;
-        private static MapGenerator mapGenerator = new MapGenerator(20, 10, new DoubleTexturePack());
+        private static MapGenerator mapGenerator = new MapGenerator(new Point(30, 5), 20, 10, new DoubleTexturePack());
 
         static void Main(string[] args)
         {
@@ -27,16 +28,9 @@ namespace JustAnotherConsoleGame
                 .Bind(player.MooveUp, ConsoleKey.UpArrow, ConsoleKey.W)
                 .Bind(player.MooveDown, ConsoleKey.DownArrow, ConsoleKey.S);
 
-
-
-
-
-
             inputManager.Run();
             Console.WriteLine("stopped");
             Console.ReadLine();
         }
-
-
     }
 }

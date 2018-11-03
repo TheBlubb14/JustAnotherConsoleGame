@@ -21,7 +21,7 @@ namespace JustAnotherConsoleGame
             this.position = position;
             this.map = map;
 
-            Console.SetCursorPosition(this.Position.X, this.Position.Y);
+            Console.SetCursorPosition(map.Offset.X + this.Position.X, map.Offset.Y + this.Position.Y);
             Console.Write(this.Icon);
         }
 
@@ -31,7 +31,7 @@ namespace JustAnotherConsoleGame
             if (this.CheckMove(newLocation))
             {
                 this.UpdatePosition(newLocation);
-                Draw();
+                this.Draw();
             }
         }
 
@@ -43,7 +43,7 @@ namespace JustAnotherConsoleGame
 
         private void Draw()
         {
-            Console.MoveBufferArea(this.oldPosition.X, this.oldPosition.Y, 1, 1, this.Position.X, this.Position.Y);
+            Console.MoveBufferArea(this.map.Offset.X + this.oldPosition.X, this.map.Offset.Y + this.oldPosition.Y, 1, 1, this.map.Offset.X + this.Position.X, this.map.Offset.Y + this.Position.Y);
         }
 
         public void MooveLeft()
@@ -72,8 +72,8 @@ namespace JustAnotherConsoleGame
 
         public bool CheckMove(Point newPosition)
         {
-            return map.CheckValidMoove(newPosition);
-            
+            return this.map.CheckValidMoove(newPosition);
+
             // TODO: playground über map api / interface bekommen
 
             // TODO: checkmoove durch map überprüfen lassen, und hier einfach nur aufrufen
