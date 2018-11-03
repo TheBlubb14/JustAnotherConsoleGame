@@ -1,47 +1,32 @@
 ﻿using JustAnotherConsoleGame.Map;
+using JustAnotherConsoleGame.Map.Texture;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace JustAnotherConsoleGame
+namespace JustAnotherConsoleGame.Map
 {
-    public partial class MapGenerator
+    public class MapGenerator
     {
-        Dictionary<CellType, char> Cells = new Dictionary<CellType, char>()
-        {
-            {CellType.WallVertical, '│' },
-            {CellType.WallHorizontal, '─'},
-
-            {CellType.CornerBottomLeft, '┐'},
-            {CellType.CornerBottomRight, '┌'},
-            {CellType.CornerTopLeft, '┘'},
-            {CellType.CornerTopRight, '└'},
-
-            {CellType.Intersection, '┼'},
-            {CellType.TBottom, '┬'},
-            {CellType.TTop, '┴'},
-            {CellType.TLeft, '┤'},
-            {CellType.TRight, '├'},
-
-            {CellType.Empty, ' ' }
-        };
-
         public int Width { get; private set; }
 
         public int Height { get; private set; }
+
+        public ITexturePack TexturePack { get; private set; }
 
         public Point SpawnPoint => new Point(this.Width / 2, this.Height / 2);
 
         private Cell[,] Map;
 
-        public MapGenerator(int width, int height)
+        public MapGenerator(int width, int height,  ITexturePack texturePack)
         {
             this.Height = height;
             this.Width = width;
+            this.TexturePack = texturePack;
 
             this.Map = new Cell[width, height];
 
-
+            #region Borders
             for (int i = 0; i < width - 1; i++)
             {
                 this.Map[i, 0] = new Cell(CellType.WallHorizontal);
@@ -59,6 +44,7 @@ namespace JustAnotherConsoleGame
 
             this.Map[0, height - 1] = new Cell(CellType.CornerTopRight);
             this.Map[width - 1, height - 1] = new Cell(CellType.CornerTopLeft);
+            #endregion 
         }
 
         public void Draw()
@@ -68,7 +54,7 @@ namespace JustAnotherConsoleGame
                 string line = "";
                 for (int x = 0; x < this.Map.GetLength(0); x++)
                 {
-                    line += this.Cells[this.Map[x, y]?.Type ?? CellType.Empty];
+                    line += TexturePack[this.Map[x, y]?.Type ?? CellType.Empty];
                 }
                 Console.WriteLine(line);
             }

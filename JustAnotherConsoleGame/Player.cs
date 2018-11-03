@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JustAnotherConsoleGame.Map;
+using System;
 using System.Drawing;
 
 namespace JustAnotherConsoleGame
