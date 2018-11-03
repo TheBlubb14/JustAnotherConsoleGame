@@ -7,6 +7,8 @@ namespace JustAnotherConsoleGame
     class Program
     {
         private static InputManager inputManager = new InputManager();
+        private static Player player;
+        private static MapGenerator mapGenerator = new MapGenerator(20, 20);
 
         static void Main(string[] args)
         {
@@ -14,11 +16,18 @@ namespace JustAnotherConsoleGame
             Console.OutputEncoding = Encoding.Unicode;
             Console.CursorVisible = false;
 
+            mapGenerator.Draw();
+            player = new Player('@', mapGenerator.SpawnPoint, mapGenerator);
+
             inputManager
-                .Bind(MooveLeft, ConsoleKey.LeftArrow, ConsoleKey.A)
-                .Bind(MooveRight, ConsoleKey.RightArrow, ConsoleKey.D)
-                .Bind(MooveUp, ConsoleKey.UpArrow, ConsoleKey.W)
-                .Bind(MooveDown, ConsoleKey.DownArrow, ConsoleKey.S);
+                .Bind(player.MooveLeft, ConsoleKey.LeftArrow, ConsoleKey.A)
+                .Bind(player.MooveRight, ConsoleKey.RightArrow, ConsoleKey.D)
+                .Bind(player.MooveUp, ConsoleKey.UpArrow, ConsoleKey.W)
+                .Bind(player.MooveDown, ConsoleKey.DownArrow, ConsoleKey.S);
+
+            
+
+
 
 
             inputManager.Run();
@@ -26,24 +35,6 @@ namespace JustAnotherConsoleGame
             Console.ReadLine();
         }
 
-        static void MooveLeft()
-        {
-            Console.Title = "left";
-        }
-
-        static void MooveRight()
-        {
-            Console.Title = "right";
-        }
-
-        static void MooveUp()
-        {
-            Console.Title = "up";
-        }
-
-        static void MooveDown()
-        {
-            Console.Title = "down";
-        }
+      
     }
 }
