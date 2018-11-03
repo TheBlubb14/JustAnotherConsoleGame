@@ -10,7 +10,7 @@ namespace JustAnotherConsoleGame
     {
         private static InputManager inputManager = new InputManager();
         private static Player player;
-        private static MapGenerator mapGenerator = new MapGenerator(20, 20, new DoubleTexturePack());
+        private static MapGenerator mapGenerator = new MapGenerator(20, 10, new DoubleTexturePack());
 
         static void Main(string[] args)
         {
