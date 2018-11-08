@@ -24,5 +24,7 @@ namespace JustAnotherConsoleGame.Map.Texture
         };
 
         public char this[CellType? index] => CellMap[index ?? CellType.Empty];
+
+        public char Player => '■';
     }
 }

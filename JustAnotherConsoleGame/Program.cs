@@ -11,7 +11,8 @@ namespace JustAnotherConsoleGame
     {
         private static InputManager inputManager = new InputManager();
         private static Player player;
-        private static MapGenerator mapGenerator = new MapGenerator(new Point(30, 5), 20, 10, new DoubleTexturePack());
+        private static ITexturePack texturePack = new DoubleTexturePack();
+        private static MapGenerator mapGenerator = new MapGenerator(new Point(30, 5), 20, 10, texturePack);
 
         static void Main(string[] args)
         {
@@ -20,7 +21,7 @@ namespace JustAnotherConsoleGame
             Console.CursorVisible = false;
 
             mapGenerator.Draw();
-            player = new Player('@', mapGenerator.SpawnPoint, mapGenerator);
+            player = new Player(texturePack.Player, mapGenerator.SpawnPoint, mapGenerator);
 
             inputManager
                 .Bind(player.MooveLeft, ConsoleKey.LeftArrow, ConsoleKey.A)
